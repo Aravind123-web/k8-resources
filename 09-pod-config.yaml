@@ -17,4 +17,9 @@ spec:
           configMapKeyRef:
             name: aravind123-web
             key: trainer
+      - name: githublink
+        valueFrom:
+          configMapKeyRef:
+            name: aravind123-web
+            key: githublink
       
