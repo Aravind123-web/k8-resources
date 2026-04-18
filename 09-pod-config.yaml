@@ -6,20 +6,23 @@ spec:
   containers:
     - name: nginx
       image: nginx
-      env:
-      - name: course
-        valueFrom:
-          configMapKeyRef:
-            name: aravind123-web
-            key: course
-      - name: trainer
-        valueFrom:
-          configMapKeyRef:
-            name: aravind123-web
-            key: trainer
-      - name: githublink
-        valueFrom:
-          configMapKeyRef:
-            name: aravind123-web
-            key: githublink
+      envFrom: # to import all the key-value pairs from configmap as environment variables
+      - configMapRef:
+          name: aravind123-web
+      # env:
+      # - name: course
+      #   valueFrom:
+      #     configMapKeyRef:
+      #       name: aravind123-web
+      #       key: course
+      # - name: trainer
+      #   valueFrom:
+      #     configMapKeyRef:
+      #       name: aravind123-web
+      #       key: trainer
+      # - name: githublink
+      #   valueFrom:
+      #     configMapKeyRef:
+      #       name: aravind123-web
+      #       key: githublink
       
