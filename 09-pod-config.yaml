@@ -10,12 +10,11 @@ spec:
       - name: course
         valueFrom:
           configMapKeyRef:
-            name: Aravind123-web
+            name: aravind123-web
             key: course
       - name: trainer
         valueFrom:
           configMapKeyRef:
-            name: Aravind123-web
+            name: aravind123-web
             key: trainer
-      
       

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: Aravind123-web
+  name: aravind123-web
 data:
   course: "Devops with aws"
   trainer: "Aravind"
