@@ -13,4 +13,4 @@ spec:
     - protocol: TCP
       port: 80 # service port0
       targetPort: 80 # target port on the pod
-      nodePort: 32768 # fixed node port to access the service from outside the cluster
+      nodePort: 32760 # fixed node port to access the service from outside the cluster
