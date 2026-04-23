@@ -12,7 +12,7 @@ spec:
   selector:
     matchLabels:
       app: nginx
-      tire: web
+      tier: web
       project: test-project
   # pod defination
   template:
