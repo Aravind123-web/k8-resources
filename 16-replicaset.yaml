@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - name: nginx
-          image: nginx:stable-trixie
+          image: nginx:edge-alpine
           ports:
             - containerPort: 80
 
