@@ -1,0 +1,68 @@
+# This manifest creates a PersistentVolume and a PersistentVolumeClaim for an EBS volume, and a Pod that uses the PVC to mount the EBS volume.
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: ebs-static
+spec:
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 100Gi
+  csi:
+    driver: ebs.csi.aws.com
+    fsType: ext4
+    volumeHandle: vol-035361c46932189e2
+---
+# PersistentVolumeClaim
+# apiVersion: v1
+# kind: PersistentVolumeClaim
+# metadata:
+#   name: ebs-static
+# spec:
+#   storageClassName: "" # Empty string must be explicitly set otherwise default StorageClass will be set
+#   volumeName: ebs-static
+#   accessModes:
+#     - ReadWriteOnce
+#   resources:
+#     requests:
+#       storage: 5Gi
+# ---
+
+# # Pod
+# apiVersion: v1
+# kind: Pod
+# metadata:
+#   name: nginx-static
+#   labels:
+#     purpose: ebs-static
+#     project: expense
+# spec:
+#   containers:
+#     - name: nginx
+#       image: nginx
+#       volumeMounts:
+#       - name: persistent-storage
+#         mountPath: /usr/share/nginx/html
+#   volumes:
+#     - name: persistent-storage
+#       persistentVolumeClaim:
+#         claimName: ebs-static
+# ---
+
+# # loadBalancer service to access nginx from outside the cluster
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: nginx-lb
+# spec:
+#   type: LoadBalancer
+#   selector:
+#    purpose: ebs-static
+#    project: expense
+#   ports:
+#     - protocol: TCP
+#       port: 80 # service port0
+#       targetPort: 80 # target port on the pod
+#       #nodePort: 32761 # fixed node port to access the service from outside the cluster 
+
+
