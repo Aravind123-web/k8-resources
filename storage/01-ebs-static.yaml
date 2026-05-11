@@ -43,6 +43,9 @@ spec:
       volumeMounts:
       - name: persistent-storage
         mountPath: /usr/share/nginx/html
+  # nodeSelector is used to schedule the pod on a specific node or group of nodes. In this case, we are using the topology.kubernetes.io/zone label to schedule the pod on nodes that are in the us-east-1a availability zone.
+  #nodeSelector:
+  #  topology.kubernetes.io/zone: us-east-1a
   volumes:
     - name: persistent-storage
       persistentVolumeClaim:
