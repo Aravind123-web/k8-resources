@@ -16,19 +16,19 @@ spec:
     volumeHandle: "fs-01d4f0ee2daf671f3"
 ---
 # PersistentVolumeClaim (PVC)
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: efs-static-claim
-# spec:
-#   accessModes:
-#     - ReadWriteOnce
-#   storageClassName: ""
-#   volumeName: efs-static
-#   resources:
-#     requests:
-#       storage: 2Gi
-# ---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: efs-static-claim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ""
+  volumeName: efs-static
+  resources:
+    requests:
+      storage: 2Gi
+---
 # # Pod
 # apiVersion: v1
 # kind: Pod
