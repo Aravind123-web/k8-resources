@@ -1,3 +1,4 @@
+# storage class for ebs volumes. This storage class will be used by the persistent volume claims to create ebs volumes dynamically.
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
