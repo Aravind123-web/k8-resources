@@ -1,0 +1,44 @@
+#PVC
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: efs-dynamic
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: efs-dyamic
+  resources:
+    requests:
+      storage: 5Gi
+---
+#Pod
+apiVersion: v1
+kind: Pod
+metadata:
+  name: efs-dynamic
+  labels:
+    purpose: efs-dynamic
+spec:
+  containers:
+  - name: app
+    image: nginx
+    volumeMounts:
+    - name: persistent-storage
+      mountPath: /usr/share/nginx/html
+  volumes:
+  - name: persistent=storage
+    persistentVolumeClaim:
+      claimName: efs-dynamic    
+---
+# LoadBalancer service to access nginx from outside the cluster
+apiVersion: v1
+kind: Service
+metadata:
+  name: efs-dynamic
+spec:
+  selector:
+   purpose: efs-dynamic
+  ports:
+    - protocol: TCP
+      port: 80 # service port
+      targetPort: 80 # target port on the pod
