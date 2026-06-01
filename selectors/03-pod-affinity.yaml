@@ -13,28 +13,28 @@ spec:
       imagePullPolicy: Always #keep this as always
 ---
 #pod2
-# apiVersion: v1
-# kind: Pod
-# metadata:
-#   name: pod-2
-#   labels:
-#     name: pod-2
-#     purpose: affinity
-# spec:
-#   affinity:
-#     podAffinity:
-#       requiredDuringSchedulingIgnoredDuringExecution:
-#       - labelSelector:
-#           matchExpressions:
-#           - key: name
-#             operator: In
-#             values:
-#             - pod-1
-#         topologyKey: topology.kubernetes.io/zone
-#   containers:
-#     - name: nginx
-#       image: nginx
-#       imagePullPolicy: always #keep this as always
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-2
+  labels:
+    name: pod-2
+    purpose: affinity
+spec:
+  affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+          - key: name
+            operator: In
+            values:
+            - pod-1
+        topologyKey: topology.kubernetes.io/zone
+  containers:
+    - name: nginx
+      image: nginx
+      imagePullPolicy: Always #keep this as always
 # ---
 # #pod3 anti affinity with pod1
 # apiVersion: v1
@@ -58,4 +58,4 @@ spec:
 #   containers:
 #     - name: nginx
 #       image: nginx
-#       imagePullPolicy: always #keep this as always
+#       imagePullPolicy: Always #keep this as always
