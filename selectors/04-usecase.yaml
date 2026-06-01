@@ -1,3 +1,5 @@
+# This file contains two Deployments: one for a Redis cache and another for a web server. Both Deployments use pod affinity and anti-affinity rules to ensure that the pods are scheduled on different nodes for high availability. 
+# The Redis cache pods will be scheduled on different nodes, while the web server pods will be scheduled on the same nodes as the Redis cache pods to ensure low latency communication between the web server and the cache.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -25,3 +27,40 @@ spec:
       containers:
       - name: redis-server
         image: redis:3.2-alpine
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-server
+spec:
+  selector:
+    matchLabels:
+      app: web-store
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: web-store
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - web-store
+            topologyKey: "kubernetes.io/hostname"
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - store
+            topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: web-app
+        image: nginx:1.16-alpine
