@@ -10,7 +10,7 @@ spec:
   containers:
     - name: nginx
       image: nginx
-      imagePullPolicy: always #keep this as always
+      imagePullPolicy: Always #keep this as always
 ---
 #pod2
 # apiVersion: v1
